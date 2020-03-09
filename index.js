@@ -44,13 +44,15 @@
       earth.material = earthMaterial;
 
         // Moon
-        var moon = BABYLON.MeshBuilder.CreateSphere("moon", {diameter: .1}, scene);
+        var moon = BABYLON.MeshBuilder.CreateSphere("moon", {diameter: .4}, scene);
         moon.position.x = -1;
         moon.position.y = .2
         var moonMaterial = new BABYLON.StandardMaterial("ground", scene);
         moonMaterial.diffuseTexture = new BABYLON.Texture("https://st2.depositphotos.com/2800301/6522/i/950/depositphotos_65228533-stock-photo-moon-surface-texture.jpg", scene);
         moonMaterial.diffuseTexture.vScale = -1;
         moon.material = moonMaterial;
+
+        moon.parent = earth
 
 
 
@@ -62,6 +64,7 @@
         earth.rotate(earthAxis, angle, BABYLON.Space.WORLD);
         mercury.rotate(earthAxis, angle, BABYLON.Space.WORLD);
         moon.rotate(earthAxis, angle, BABYLON.Space.WORLD);
+
       })
 
       return scene;
