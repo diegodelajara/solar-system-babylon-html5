@@ -36,7 +36,7 @@
       var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameter: sizes.sun}, scene);
       sun.position.x = 70;  
       var sunMaterial = new BABYLON.StandardMaterial("ground", scene);
-      sunMaterial.diffuseTexture = new BABYLON.Texture("/images/sun.jpg", scene);
+      sunMaterial.diffuseTexture = new BABYLON.Texture("./images/sun.jpg", scene);
       sunMaterial.diffuseTexture.vScale = -1;
       sun.material = sunMaterial;
 
@@ -44,7 +44,7 @@
       var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameter: sizes.mercurio}, scene);
       mercury.position.x = 3;  
       var mercuryMaterial = new BABYLON.StandardMaterial("ground", scene);
-      mercuryMaterial.diffuseTexture = new BABYLON.Texture("/images/mercury.jpg", scene);
+      mercuryMaterial.diffuseTexture = new BABYLON.Texture("./images/mercury.jpg", scene);
       mercuryMaterial.diffuseTexture.vScale = -1;
       mercury.material = mercuryMaterial;
 
@@ -52,7 +52,7 @@
       var venus = BABYLON.MeshBuilder.CreateSphere("venus", {diameter: sizes.venus}, scene);
       venus.position.x = 1.8;  
       var venusMaterial = new BABYLON.StandardMaterial("ground", scene);
-      venusMaterial.diffuseTexture = new BABYLON.Texture("/images/venus.jpg", scene);
+      venusMaterial.diffuseTexture = new BABYLON.Texture("./images/venus.jpg", scene);
       venusMaterial.diffuseTexture.vScale = -1;
       venus.material = venusMaterial;
 
@@ -77,7 +77,7 @@
       var mars = BABYLON.MeshBuilder.CreateSphere("mars", {diameter: sizes.marte}, scene);
       mars.position.x = -1.8;
       var marsMaterial = new BABYLON.StandardMaterial("ground", scene);
-      marsMaterial.diffuseTexture = new BABYLON.Texture("/images/mars.jpg", scene);
+      marsMaterial.diffuseTexture = new BABYLON.Texture("./images/mars.jpg", scene);
       marsMaterial.diffuseTexture.vScale = -1;
       mars.material = marsMaterial;
 
@@ -85,7 +85,7 @@
       var jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter", {diameter: sizes.jupiter}, scene);
       jupiter.position.x = -13.4;
       var jupiterMaterial = new BABYLON.StandardMaterial("ground", scene);
-      jupiterMaterial.diffuseTexture = new BABYLON.Texture("/images/jupiter.jpg", scene);
+      jupiterMaterial.diffuseTexture = new BABYLON.Texture("./images/jupiter.jpg", scene);
       jupiterMaterial.diffuseTexture.vScale = -1;
       jupiter.material = jupiterMaterial;
 
