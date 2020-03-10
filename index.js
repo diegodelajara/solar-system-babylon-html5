@@ -1,26 +1,30 @@
   var sizes = {
+    sun: 100,
     mercurio: 0.488,
     venus: 1.2,
     tierra: 1.28,
-    martes: 0.68,
+    marte: 0.68,
     jupiter: 14.2,
     Saturno: 12,
     urano: 5.18,
     neptuno: 4.95,
     pluton: 0.23,
   }
-  var canvas = document.querySelector("#renderCanvas"); // Get the canvas element
-  var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+  var canvas = document.querySelector("#renderCanvas");
+  var engine = new BABYLON.Engine(canvas, true);
 
   /******* Add the create scene function ******/
   var createScene = function () {
 
-      // Create the scene space
       const scene = new BABYLON.Scene(engine);
 
-      // Add a camera to the scene and attach it to the canvas
-      var camera = new BABYLON.ArcRotateCamera("Camera", -1.5, 1.5, -.4, new BABYLON.Vector3(0,0,5), scene);
-      // var camera = new BABYLON.FollowCamera('Camera', -1.5, 1.5, -2, scene)
+      // var camera = new BABYLON.ArcRotateCamera("Camera", -1.5, 1.5, -.4, new BABYLON.Vector3(0,0,80), scene);
+
+      //---------------------------------- Universal Camera
+      var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(0, 0, 20), scene);
+      camera.setTarget(BABYLON.Vector3.Zero());
+      //---------------------------------- Universal Camera
+
       camera.attachControl(canvas, true);
 
       // Add lights to the scene
@@ -28,13 +32,29 @@
       new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
 
 
+      // Sun
+      var sun = BABYLON.MeshBuilder.CreateSphere("sun", {diameter: sizes.sun}, scene);
+      sun.position.x = 70;  
+      var sunMaterial = new BABYLON.StandardMaterial("ground", scene);
+      sunMaterial.diffuseTexture = new BABYLON.Texture("/images/sun.jpg", scene);
+      sunMaterial.diffuseTexture.vScale = -1;
+      sun.material = sunMaterial;
+
       // Mercury
-      var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameter: .48}, scene);
-      mercury.position.x = 2;  
+      var mercury = BABYLON.MeshBuilder.CreateSphere("mercury", {diameter: sizes.mercurio}, scene);
+      mercury.position.x = 3;  
       var mercuryMaterial = new BABYLON.StandardMaterial("ground", scene);
-      mercuryMaterial.diffuseTexture = new BABYLON.Texture("https://solarsystem.nasa.gov/system/downloadable_items/671_PIA17386.jpg", scene);
+      mercuryMaterial.diffuseTexture = new BABYLON.Texture("/images/mercury.jpg", scene);
       mercuryMaterial.diffuseTexture.vScale = -1;
       mercury.material = mercuryMaterial;
+
+      // Venus
+      var venus = BABYLON.MeshBuilder.CreateSphere("venus", {diameter: sizes.venus}, scene);
+      venus.position.x = 1.8;  
+      var venusMaterial = new BABYLON.StandardMaterial("ground", scene);
+      venusMaterial.diffuseTexture = new BABYLON.Texture("/images/venus.jpg", scene);
+      venusMaterial.diffuseTexture.vScale = -1;
+      venus.material = venusMaterial;
 
       // Earth
       var earth = BABYLON.MeshBuilder.CreateSphere("earth", {diameter: 1.2}, scene);
@@ -51,8 +71,24 @@
         moonMaterial.diffuseTexture = new BABYLON.Texture("https://st2.depositphotos.com/2800301/6522/i/950/depositphotos_65228533-stock-photo-moon-surface-texture.jpg", scene);
         moonMaterial.diffuseTexture.vScale = -1;
         moon.material = moonMaterial;
-
         moon.parent = earth
+
+      // Mars
+      var mars = BABYLON.MeshBuilder.CreateSphere("mars", {diameter: sizes.marte}, scene);
+      mars.position.x = -1.8;
+      var marsMaterial = new BABYLON.StandardMaterial("ground", scene);
+      marsMaterial.diffuseTexture = new BABYLON.Texture("/images/mars.jpg", scene);
+      marsMaterial.diffuseTexture.vScale = -1;
+      mars.material = marsMaterial;
+
+      // Jupiter
+      var jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter", {diameter: sizes.jupiter}, scene);
+      jupiter.position.x = -13.4;
+      var jupiterMaterial = new BABYLON.StandardMaterial("ground", scene);
+      jupiterMaterial.diffuseTexture = new BABYLON.Texture("/images/jupiter.jpg", scene);
+      jupiterMaterial.diffuseTexture.vScale = -1;
+      jupiter.material = jupiterMaterial;
+
 
 
 
@@ -61,10 +97,12 @@
     
       var angle = 0.01;
       scene.registerBeforeRender(function() {
-        earth.rotate(earthAxis, angle, BABYLON.Space.WORLD);
         mercury.rotate(earthAxis, angle, BABYLON.Space.WORLD);
+        venus.rotate(earthAxis, angle, BABYLON.Space.WORLD);
+        earth.rotate(earthAxis, angle, BABYLON.Space.WORLD);
         moon.rotate(earthAxis, angle, BABYLON.Space.WORLD);
-
+        mars.rotate(earthAxis, angle, BABYLON.Space.WORLD);
+        jupiter.rotate(earthAxis, angle, BABYLON.Space.WORLD);
       })
 
       return scene;
